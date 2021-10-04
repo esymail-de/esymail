@@ -11,23 +11,25 @@ import { UserEntity } from './entities/user.entity';
 
 @Module({
   imports: [
-    ConfigModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (cf: ConfigService) => ({
-        type: 'mongodb',
-        host: cf.get<string>('DATABASE_HOST'),
-        port: cf.get<number>('DATABASE_PORT'),
-        username: cf.get<string>('DATABASE_USER'),
-        password: cf.get<string>('DATABASE_PASSWORD'),
-        database: cf.get<string>('DATABASE_NAME'),
-        entities: [UserEntity],
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        synchronize: true,
-      }),
+      useFactory: (cf: ConfigService) => {
+        return {
+          type: 'mongodb',
+          host: cf.get<string>('DATABASE_HOST'),
+          port: cf.get<number>('DATABASE_PORT'),
+          username: cf.get<string>('DATABASE_USER'),
+          password: cf.get<string>('DATABASE_PASSWORD'),
+          database: cf.get<string>('DATABASE_NAME'),
+          entities: [UserEntity],
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          synchronize: true,
+        };
+      },
     }),
     AccessControlModule.forRoles(roles),
   ],

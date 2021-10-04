@@ -51,8 +51,7 @@ roles
   .grant(Roles.SERVER_READER)
   .readOwn('server')
   .readOwn('messages')
-  .readOwn('user')
-  .readOwn('scope');
+  .readOwn('user');
 
 /**
  * server admin. can update anything on the server, can also delete the server.
@@ -94,3 +93,21 @@ roles
   .grant(Roles.COMPANY_OWNER)
   .extend(Roles.COMPANY_ADMIN)
   .deleteOwn('company');
+
+/**
+ * global reader can read anything
+ */
+roles
+  .grant(Roles.GLOBAL_READER)
+  .extend(Roles.COMPANY_READER)
+  .readAny('company');
+
+/**
+ * global admin
+ */
+roles
+  .grant(Roles.GLOBAL_ADMIN)
+  .extend(Roles.COMPANY_ADMIN)
+  .readAny('company')
+  .deleteAny('company')
+  .updateAny('company');

@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('esymail API Documentation')
     .setDescription('All APIs for the esymail core backend')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);

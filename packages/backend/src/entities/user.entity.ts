@@ -1,13 +1,12 @@
+import { Roles } from 'src/auth/roles';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   ObjectID,
   ObjectIdColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ScopeEntity } from './scope.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -29,6 +28,12 @@ export class UserEntity {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @JoinColumn()
-  scope: ScopeEntity;
+  @Column()
+  companies: ObjectID[];
+
+  @Column()
+  servers: ObjectID[];
+
+  @Column()
+  roles: Roles[];
 }

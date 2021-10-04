@@ -27,9 +27,16 @@ export class AuthService {
     return result;
   }
 
+  async register(b: any): Promise<any> {
+    b.password = await bcrypt.hash(b.password, 12);
+    return this.userRepo.save(b);
+  }
+
   async login(user: Partial<UserEntity>) {
+    const userA = await this.validateUser(user.email, user.password);
+    const { password, ...userB } = userA;
     return {
-      access_token: this.jwtService.sign(user),
+      access_token: this.jwtService.sign(userB),
     };
   }
 }
