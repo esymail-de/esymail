@@ -20,3 +20,6 @@ Tho we have plans to add some kind of plugin system, we are not building esymail
 
 ##### What do we plan to accomplish?
 We are trying to build a tool where all difficult things in the broad term "email" are handled automatically, so you can focus on actually sending emails or develop your product further instead of maintaining a complex system. 
+
+##### Design
+We are no designers, so we are looking for help during the frontend-development part of the project. I have started a little mockup over [here](https://www.figma.com/file/cwF4JxXmjDEuDl1eBGYLOw/email-server?node-id=0%3A1)
